@@ -1,6 +1,6 @@
 import React from "react";
 import "./QuizView.css";
-const QuizView = ({ questions, currentQuestion, handleButton }) => {
+const QuizView = ({ questions, currentQuestion, handleButtonOptions }) => {
   return (
     <div className="question">
       <div className="question-number">
@@ -14,7 +14,7 @@ const QuizView = ({ questions, currentQuestion, handleButton }) => {
       <div className="answer">
         {questions[currentQuestion].answers.map(({ text, isCorrect }) => {
           return (
-            <button key={text} onClick={() => handleButton(isCorrect)}>
+            <button key={text} onClick={() => handleButtonOptions(isCorrect)}>
               {text}
             </button>
           );

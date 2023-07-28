@@ -23,3 +23,6 @@
   row-gap: 15px;
   width: 70%;
 }
+button:hover {
+  color: orange;
+}

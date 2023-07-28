@@ -47,18 +47,41 @@ function App() {
     },
   ];
 
-  const [currentQuestion, setCurrentQuestion] = useState(4);
-  const handleButton = (isCorrect) => {
-    alert("Clicked button" + isCorrect);
+  const [currentQuestion, setCurrentQuestion] = useState(0);
+  const [quizOver, setQuizOver] = useState(false);
+  const [score, setScore] = useState(0);
+
+  const handleButtonOptions = (isCorrect) => {
+    // score Check
+    if (isCorrect) {
+      setScore(score + 1);
+    }
+
+    const next = currentQuestion + 1;
+    if (next < questions.length) {
+      setCurrentQuestion(next);
+    } else {
+      setQuizOver(true);
+    }
   };
+
+  const handleResetButton = () => {
+    setCurrentQuestion(0);
+    setQuizOver(false);
+    setScore(0);
+  };
+
   return (
     <div className="App">
-      <ScoreView />
-      <QuizView
-        questions={questions}
-        currentQuestion={currentQuestion}
-        handleButton={handleButton}
-      />
+      {quizOver ? (
+        <ScoreView handleResetButton={handleResetButton} score={score} />
+      ) : (
+        <QuizView
+          questions={questions}
+          currentQuestion={currentQuestion}
+          handleButtonOptions={handleButtonOptions}
+        />
+      )}
     </div>
   );
 }
