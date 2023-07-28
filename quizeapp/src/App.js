@@ -2,6 +2,7 @@ import QuizView from "./Components/QuizView";
 import ScoreView from "./Components/ScoreView";
 
 import "./App.css";
+import { useState } from "react";
 function App() {
   const questions = [
     {
@@ -46,10 +47,18 @@ function App() {
     },
   ];
 
+  const [currentQuestion, setCurrentQuestion] = useState(4);
+  const handleButton = (isCorrect) => {
+    alert("Clicked button" + isCorrect);
+  };
   return (
     <div className="App">
       <ScoreView />
-      <QuizView />
+      <QuizView
+        questions={questions}
+        currentQuestion={currentQuestion}
+        handleButton={handleButton}
+      />
     </div>
   );
 }

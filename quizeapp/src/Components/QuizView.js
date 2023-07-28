@@ -1,18 +1,24 @@
 import React from "react";
 import "./QuizView.css";
-const QuizView = () => {
+const QuizView = ({ questions, currentQuestion, handleButton }) => {
   return (
     <div className="question">
       <div className="question-number">
-        <span>Question 1/5</span>
+        <span>
+          Question {currentQuestion + 1}/{questions.length}
+        </span>
         <div className="question-text">
-          What comes after A comes comes comes comes comes comes comes
+          {questions[currentQuestion].question}
         </div>
       </div>
       <div className="answer">
-        <button>B</button>
-        <button>C</button>
-        <button>D</button>
+        {questions[currentQuestion].answers.map(({ text, isCorrect }) => {
+          return (
+            <button key={text} onClick={() => handleButton(isCorrect)}>
+              {text}
+            </button>
+          );
+        })}
       </div>
     </div>
   );
